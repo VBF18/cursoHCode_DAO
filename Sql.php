@@ -1,35 +1,31 @@
 <?php  
 
-class Sql extends PDO
-{
+class Sql extends PDO {
 	private $conn;	
-
-	public function __construct()
-	{
-		$this->conn = new PDO("mysql:dbname=dbcursophp;host=localhost", "root", "jwFBR6KemHP%");		
+	public function __construct(){
+		$this->conn = new PDO("mysql:dbname=dbcursophp;host=localhost", "root", "jwFBR6KemHP%");
 	}
 
 	private function setParams($statement, $parameters = array()){
 		foreach ($parameters as $key => $value) {
-			$this->setParam($statement, $key, $value);		
+			$this->setParam($statement, $key, $value);					
 		}
 	}
 
 	private function setParam($statement, $key, $value){
-		$statement->bindParam($key, $Value);
+		$statement->bindParam($key, $value);		
 	}
 
 	public function query($rawQuery, $params = array()){
 		$stmt = $this->conn->prepare($rawQuery);		
-		$this->setParams($stmt, $params);		
-		$stmt->execute();
+		$this->setParams($stmt, $params);			
+		$stmt->execute();		
 		return $stmt;		
 	}
-
-	public function select($rawQuery, $params = array()):array //declaração de retorno de função/método, que tem o objetivo de declarar que, esta dada função/método retorna um array. 
+	public function select($rawQuery, $params = array()):array
 	{
-		$stmt = $this->query($rawQuery, $params);
-		return $stmt->fetchAll(PDO::FETCH_ASSOC);		
+		$stmt = $this->query($rawQuery, $params);				
+		return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
 }
 

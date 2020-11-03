@@ -34,16 +34,13 @@ class Usuario
 
 	public function loadById($id){		
 	$sql = new Sql();
+
 	$results = $sql->select("SELECT * FROM tb_usuarios WHERE idusuario = :ID", array(
 		":ID"=>$id		
 	));
 
-	echo "<pre>";
-	print_r($results);
-	echo "</pre>";
-
 	if (count($results) > 0) {
-		$row = $results[0]; // porque estamos pesquisando 1 único id		
+		$row = $results[0]; // porque estamos pesquisando 1 único id	
 
 		$this->setIdusuario($row['idusuario']);
 		$this->setDeslogin($row['deslogin']);
